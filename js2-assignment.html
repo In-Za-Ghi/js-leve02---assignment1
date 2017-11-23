@@ -1,0 +1,232 @@
+  	<html>
+
+		<title>Alien</title>
+
+
+  	<head><script>
+
+myTimer = null
+
+jumpTimer = null
+
+step = 11
+
+isJump = false
+
+var pos = 0;
+
+var posY = 4;
+
+var speedY = 4;
+
+var speedX = 4;
+
+var playerPos = 108;
+
+var playerPosSpeed = 1;
+
+
+
+
+
+var viewportwidth;
+
+
+
+if (typeof window.innerWidth != 'undefined')
+
+{
+
+     viewportwidth = window.innerWidth
+
+}
+
+
+
+function move(){
+
+    playerPos += playerPosSpeed;
+
+
+
+    step++
+
+    if(step >= 30){
+
+        step = 0
+
+    }
+
+
+
+    if(playerPos > viewportwidth){
+
+            speedX = -speedX;
+
+            playerPosSpeed = -playerPosSpeed;
+
+    }
+
+
+
+    if(playerPos < 106){
+
+            speedX = -speedX;
+
+            playerPosSpeed = -playerPosSpeed;
+
+    }
+
+
+
+    var img = document.getElementById('x')
+
+
+
+
+
+        if(!isJump){
+
+            if(speedX > 0){
+
+                    img.style.left = parseInt(img.style.left)+1+'px'
+
+                    img.src='images/alien/alienrwalk' + step + '.gif'
+
+            }
+
+            else{
+
+                    img.style.left = parseInt(img.style.left)-1+'px'
+
+                    img.src='images/alien/alienlwalk' + step + '.gif'
+
+            }
+
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+function jumpClick(){
+
+
+
+            jumpTimer = setInterval(jump, 20)
+
+
+
+setTimeout(function(){ clearInterval(jumpTimer); isJump = false; }, 1000);
+
+
+
+}
+
+
+
+function jump(){
+
+
+
+    isJump = true;
+
+
+
+    pos += posY;
+
+
+
+    var img = document.getElementById('x')
+
+
+
+   if (pos >= 100) {
+
+       posY = -posY;
+
+       speedY = -speedY;
+
+       console.log(pos);
+
+   }
+
+   if (pos <= 0){
+
+       posY = -posY;
+
+       speedY = -speedY;
+
+       console.log(pos);
+
+   }
+
+
+
+    img.style.top = parseInt(img.style.top) - speedY + 'px';
+
+ img.style.left = parseInt(img.style.left)+ speedX + 'px';
+
+
+
+     
+
+
+
+ }
+
+
+
+onload=function(){
+
+    var im = document.getElementById('x')
+
+    
+
+    im.onclick=function(){
+
+        if(myTimer == null){
+
+            // not running; let's start a timer
+
+            myTimer = setInterval(move, 10)
+
+        }else{
+
+            // timer is already running; let's stop it
+
+            clearInterval(myTimer)
+
+            myTimer = null
+
+        }
+
+    }
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+    <img src="images/alien/alienrwalk11.gif" id="x"
+
+         style="position:absolute; left:12px; top:100px">
+
+
+
+    <button onclick="jumpClick()">Jump</button>
+
+
+
+</body>
+
+</html>	  
