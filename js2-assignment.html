@@ -8,7 +8,6 @@ var posY = 4;
 var speedY = 4;
 var speedX = 1;
 var playerPos = 12;
-var playerPosSpeed = 1;
 
 
 var viewportwidth;
@@ -20,7 +19,7 @@ if (typeof window.innerWidth != 'undefined')
 
 function move(){
 	viewportwidth = window.innerWidth - 96;
-	playerPos += playerPosSpeed;
+	playerPos += speedX;
 
 	step++
 	if(step >= 30){
@@ -29,12 +28,10 @@ function move(){
 
 	if(playerPos > viewportwidth){
 			speedX = -speedX;
-			playerPosSpeed = -playerPosSpeed;
 	}
 
 	if(playerPos < 12){
 			speedX = -speedX;
-			playerPosSpeed = -playerPosSpeed;
 	}
 
 	var img = document.getElementById('x')
@@ -65,11 +62,6 @@ function jumpClick(){
 					jumpTimer = setInterval(jump, 20)
 					setTimeout(function(){ clearInterval(jumpTimer); isJump = false; }, 1000);
 				}
-			//}
-			//else{
-			//	clearInterval(jumpTimer);
-			//	jumpTimer = null;
-			//}
 
 }
 
@@ -100,6 +92,7 @@ onload=function(){
 	var im = document.getElementById('x')
 	
 	im.onclick=function(){
+		if(!isJump){
 		if(myTimer == null){
 			// not running; let's start a timer
 			myTimer = setInterval(move, 10)
@@ -108,6 +101,7 @@ onload=function(){
 			clearInterval(myTimer)
 			myTimer = null
 		}
+	}
 	}
 }
 </script>
