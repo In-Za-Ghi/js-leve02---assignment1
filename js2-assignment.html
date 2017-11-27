@@ -4,39 +4,44 @@ jumpTimer = null
 step = 11
 isJump = false
 var pos = 0;
-var posY = 4;
 var speedY = 4;
 var speedX = 1;
 var playerPos = 12;
-
-
 var viewportwidth;
 
-if (typeof window.innerWidth != 'undefined')
- {
-      viewportwidth = window.innerWidth
- }
+
+
+
+//if (typeof window.innerWidth != 'undefined')
+ //{
+ //     viewportwidth = window.innerWidth
+ //}
 
 function move(){
 	viewportwidth = window.innerWidth - 96;
-	playerPos += speedX;
+	
+	var img = document.getElementById('x');
+	
+	playerPos = parseInt(img.style.left);
 
 	step++
 	if(step >= 30){
 		step = 0
 	}
 
-	if(playerPos > viewportwidth){
+	if(playerPos >= viewportwidth){
 			speedX = -speedX;
+			playerPos = viewportwidth;
 	}
 
-	if(playerPos < 12){
+	if(playerPos <= 0){
 			speedX = -speedX;
+			playerPos = 0;
 	}
+	
 
-	var img = document.getElementById('x')
-
-
+	//console.log(parseInt(img.style.top));
+	//console.log(parseInt(img.style.top));
 		
 			if(speedX > 0){
 					img.style.left = parseInt(img.style.left)+speedX+'px'
@@ -55,7 +60,7 @@ function move(){
 
 
 function jumpClick(){
-
+			
 			//if(jumpTimer == null){
 				if(!isJump){
 					isJump = true;
@@ -69,22 +74,21 @@ function jump(){
 
 	isJump = true;
 
-	pos += posY;
+	pos += speedY;
 
 	var img = document.getElementById('x')
 
     if (pos >= 100) {
-    	posY = -posY;
     	speedY = -speedY;
-    	console.log(pos);
+    	//console.log(pos);
     }
     if (pos <= 0){
-    	posY = -posY;
     	speedY = -speedY;
-    	console.log(pos);
+    	//console.log(pos);
     }
-
+	
 	img.style.top = parseInt(img.style.top) - speedY + 'px';  	
+	console.log(parseInt(img.style.top));
 
   }
 
