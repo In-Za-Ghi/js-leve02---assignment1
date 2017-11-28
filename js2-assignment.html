@@ -1,23 +1,28 @@
-<html><head><script>
+<html>
+<head>
+<title>Alien Jumping</title>
+<script>
+
+// all Variables
 myTimer = null
 jumpTimer = null
 step = 11
 isJump = false
 var pos = 0;
+
+// Speed Y is jump speed
 var speedY = 4;
+
+// Speed x is the vertical speed
 var speedX = 1;
 var playerPos = 12;
 var viewportwidth;
 
 
-
-
-//if (typeof window.innerWidth != 'undefined')
- //{
- //     viewportwidth = window.innerWidth
- //}
+// Move Function Created
 
 function move(){
+	// Browser width minus the image width
 	viewportwidth = window.innerWidth - 96;
 	
 	var img = document.getElementById('x');
@@ -39,9 +44,7 @@ function move(){
 			playerPos = 0;
 	}
 	
-
-	//console.log(parseInt(img.style.top));
-	//console.log(parseInt(img.style.top));
+			// Speed X is the vertical speed
 		
 			if(speedX > 0){
 					img.style.left = parseInt(img.style.left)+speedX+'px'
@@ -58,6 +61,7 @@ function move(){
 
 	}
 
+// Jump click function created
 
 function jumpClick(){
 			
@@ -69,6 +73,8 @@ function jumpClick(){
 				}
 
 }
+
+// Function for Jump
 
 function jump(){
 
